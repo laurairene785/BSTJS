@@ -35,20 +35,19 @@ function insert(data) {
     } else {
         var current = this.root;
         var parent;
-        while (true) {
-            parent = current;
-            if (data < current.data) {
-                current = current.left;
-                if (current == null) {
-                    parent.left = n;
-                    break;
-                }
+        if (data < current.data) {
+            if (current.left == null) {
+                current.leftChild = data;
+                current.parent = current;
             } else {
-                current = current.right;
-                if (current == null) {
-                    parent.right = n;
-                    break;
-                }
+                insert(data, current.leftChild);
+            }
+        } else {
+            if (current.rigthChild == null) {
+                current.rigthChild = data;
+                current.parent = current;
+            } else {
+                insert(data, current.rigthChild);
             }
         }
     }
